@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Booking's List</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="JS/jquery.min.js"></script>
+
+<style>
+
+body{
+	font-family: verdana !important;
+}
+
+.parallax {
+  background-image: url("Images/healthcare.jpg");
+  height: 800px;
+  padding-left: 20px;
+  padding-top: 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.userMsgDiv{
+	left:0;
+	top:0;
+	height: 70px;
+	padding: 6px;
+	padding-left: 10px;
+	border-radius: 40px;
+	background-color: white;
+		-webkit-box-shadow: 3px 3px 5px 6px #888888;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #888888;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #888888;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.UserAvatar{
+	height: 50px;
+	width: 50px;
+}
+
+#userMsg{
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.menuDivContainer{
+	width:600px;
+	height: 600px;
+	margin-left: 410px;
+}
+
+ .commonMenuImg{
+	width:200px;
+	height: 200px;
+} 
+.commonMenuLink{
+	width: 230px;
+	height: 230px;
+	padding: 10px;
+	text-align: center;
+	border-radius: 20px;
+	-webkit-box-shadow: 3px 3px 5px 6px #1d4b63;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #1d4b63;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #1d4b63;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  cursor: pointer;
+}
+
+.txt{
+	font:normal 14px verdana;
+	color: white;
+}
+
+#Patient 
+{
+  margin-left: 4px;
+  width:690px;
+  border-collapse: collapse;
+  border:1px solid #eef1f7;
+}
+
+.tblContainer{
+  margin-left: 38%;
+  margin-top: 10%;
+  text-align: center;
+  top: 100px;
+  width: 700px;
+  padding: 20px;
+  -webkit-box-shadow: 3px 3px 5px 6px #888888;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #888888;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #888888;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  
+}
+
+.header{
+  background-color: #324467;
+  padding: 6px;
+  color: #ffffff;
+  border:1px solid #eef1f7;
+}
+
+#Patient td{
+  background-color:  #021117;
+  border:1px solid #eef1f7;
+  color: #ffffff;
+  opacity: 0.7;
+  padding: 6px;
+}
+
+.link{
+  text-decoration: underline;
+  cursor: pointer;
+}
+</style>
+
+</head>
+<body>
+
+<div class="parallax">
+	<table class="userMsgDiv">
+		<tr>
+			<td>
+				<img src="Images/avatar7.png" class="UserAvatar" />
+			</td>
+			<td id="userMsg" valign="middle">
+				Welcome!
+			</td>
+		</tr>
+	</table>
+    <div class="tblContainer">
+	    <table id="Patient">
+	      <tr>
+	           <th class='header'>Patient Name</th>
+	           <th class='header'>Booking Date</th>
+	           <th class='header'>Click to Prescribe</th>
+	           <th class='header'>Check History</th>
+	      </tr>
+	      <tr><td colspan='4'>No Results Found.</td></tr>
+	    </table>
+  </div>
+</div>
+
+<script type="text/javascript">
+	
+  var userName = "";
+  var Name = ""
+  var strParam;
+	$(function() {
+		
+        strParam = window.location.href.split("?")[1];
+        strParam = strParam.split("&");
+        userName = (strParam[0].split("="))[1];
+        Name = (strParam[1].split("="))[1];
+    	// alert(userName);
+    	// alert(Name);
+    	$("#userMsg").text("Welcome " + Name + "!");
+
+    $.support.cors = true;
+    $.ajax({
+      url: "http://10.216.75.231:4200/DoctorInfoService/getPatientListForDoctor", //192.168.0.17
+      method: "POST",
+      data: JSON.stringify({'userNameDoctor': userName}),
+      contentType: "application/json;",
+      dataType : "json",
+      encoding: false ,
+      success: function( resp ) {
+           var str = "";
+           str += "<tr>";
+           str += "<th class='header'>Patient Name</th>";
+	       str += "<th class='header'>Booking Date</th>";
+	       str += "<th class='header'>Click to Prescribe</th>";
+	       str += "<th class='header'>Check History</th>";
+           str += "</tr>";
+
+          if($($($(resp)[0].context)[0].entity)[0].ListOfPatientBooked == "No Result Found")
+          {
+            str += "<tr><td colspan='4'>No Results Found.</td></tr>"
+            $("#Patient").empty();
+            $("#Patient").append(str);
+            return;
+          }
+          var obj = $.parseJSON($($($(resp)[0].context)[0].entity)[0].ListOfPatientBooked);
+          // "ListOfPatientBooked": "[{\"date_of_doc_booking\":\"04/23/2019\",\"doctor_id\":\"1\",\"patient_id\":\"1\",\"patientName\":\"test user\",\"bookingId\":\"1\"}]"},
+          
+          $(obj).each(function(){
+            // alert($(this)[0].pharmacyName);
+            str += "<tr>";
+            str += "<td>" + $(this)[0].patientName + "</td>";
+            str += "<td>" + $(this)[0].date_of_doc_booking + "</td>";
+            str += "<td><a class='link' onClick='Prescribe(" + $(this)[0].bookingId + ", this);'>Prescribe</a></td>";
+            str += "<td><a class='link' id='" + $(this)[0].ptientEmailId + "' onClick='checkHistory(this);'>History</a></td>";
+            str += "</tr>";
+          });
+          $("#Patient").empty();
+          // alert(str);
+          $("#Patient").append(str); 
+
+      },
+      error: function( req, status, err ) {
+        console.log( 'something went wrong', status, err );
+      }
+    });
+  });
+
+ function checkHistory(ct){
+
+ 	var HRef = "../SSDIProject/PatientHistory.html";
+ 
+ // 	alert(email);
+	HRef = HRef + "?UserName=" + $(ct).attr("id") + "&Name=&showExtraBtn=N";
+ 	window.open(HRef,"_blank")
+ }
+
+
+
+</script>
+</body>
+</html>

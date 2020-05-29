@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Medicine Availability</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="JS/jquery.min.js"></script>
+  <style type="text/css">
+    /* Stuff I added */
+.menu-outer:hover ~ .menu-close {
+  margin-right:-100px;
+}
+.menu-outer:hover .bar { background:rgba(100,200,240,.9); }
+.menu-outer > nav ul { top:15%; }
+
+/* The rest I chnaged parts but not most of it */
+
+html, body {
+  background:#124060;
+  background-image: url("Images/1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+body{
+  padding-top: 200px;
+  font-family: verdana;
+
+}
+
+.menu-outer {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  font-family: 'Montserrat', serif;
+  z-index: 998;  
+  width: 100%;
+  left: 100%;
+  margin-left: -100px;
+  height: 200%;
+  background: #324467;  
+  -webkit-transition: all ease .5s;
+  -moz-transition: all ease .5s;
+  -ms-transition: all ease .5s;
+  -o-transition: all ease .5s;
+  transition: all ease .5s; 
+  -webkit-transform-origin: top left;
+  -moz-transform-origin: top left;
+  -ms-transform-origin: top left;
+  -o-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.menu-outer:hover {
+  background: #cbd5e6;
+  left: 0;
+  margin-left: 0;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.menu-icon {
+  cursor: pointer;
+  background-image: url("Images/search.jpg");
+  z-index: 999;
+  position: absolute;
+  top: 40px;
+  left: 3px;
+  width: 30px;
+  pointer-events: none;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transition: all ease .5s;
+  -moz-transition: all ease .5s;
+  -ms-transition: all ease .5s;
+  -o-transition: all ease .5s;
+  transition: all ease .5s;
+}
+
+.menu-outer:hover > .menu-icon {
+  opacity: 0;
+}
+
+.menu-close {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 100%;
+  width: 200px;
+  height: 200px;
+  background: rgba(250,130,70,1);
+  cursor: pointer;
+  -webkit-transition: all ease .5s;
+  -moz-transition: all ease .5s;
+  -ms-transition: all ease .5s;
+  -o-transition: all ease .5s;
+  transition: all ease .5s;
+  -webkit-transform-origin: top right;
+  -moz-transform-origin: top right;
+  -ms-transform-origin: top right;
+  -o-transform-origin: top right;
+  transform-origin: top right;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.menu-close .menu-icon {
+  right: 15px; left: auto;top: 68px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.menu-close .bar {
+  background: rgba(250,250,250,1);
+  width: 100%;
+  height: 5px;
+  position:absolute;
+  -webkit-transform-origin: center;
+  -moz-transform-origin: center;
+  -ms-transform-origin: center;
+  -o-transform-origin: center;
+  transform-origin: center;
+}
+.menu-close .bar:first-child {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.menu-close .bar:last-child {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.searchImg{
+  width:50px;
+  height: 50px;
+}
+
+.searchBy{
+  cursor: pointer;
+  position: absolute;
+  top:10%;
+  width:300px;
+  height: 330px;
+  background-color: #425b8a;
+  border-radius: 20px;
+  padding: 10px;
+    left: 40%; /*prevents possible click when not oppened*/
+    text-align: center;
+  -webkit-transition: all ease .5s;
+  -moz-transition: all ease .5s;
+  -ms-transition: all ease .5s;
+  -o-transition: all ease .5s;
+  transition: all ease .5s;
+    -webkit-box-shadow: 3px 3px 5px 6px #4b679b;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #4b679b;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #4b679b;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.commonInput{
+  border-radius: 20px;
+  padding: 4px;
+  width: 280px;
+  font-size: 14px;
+}
+
+.txt{
+  width: 280px;
+  border-radius:20px;
+  border:1px solid #ffffff;
+  padding: 6px;
+  color: #ffffff;
+  font:normal 16px verdana;
+  margin-left: 2px;
+}
+
+
+.btnSearch{
+  border-radius:20px;
+  border:1px solid #ffffff;
+  padding: 6px;
+  text-align: center;
+}
+
+.txtTD{
+  color: #ffffff;
+  font:normal 16px verdana;
+  margin-left: 10px;
+}
+
+.icon{
+  width: 30px;
+  height: 30px;
+}
+.innerTable{
+  margin-left: 30%;
+}
+
+#Meds 
+{
+  margin-left: 4px;
+  width:690px;
+  border-collapse: collapse;
+  border:1px solid #eef1f7;
+}
+
+.tblContainer{
+  margin-left: 24%;
+  text-align: center;
+  top: 100px;
+  width: 700px;
+  padding: 20px;
+  -webkit-box-shadow: 3px 3px 5px 6px #4b679b;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #4b679b;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #4b679b;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+
+}
+
+.header{
+  background-color: #324467;
+  padding: 6px;
+  color: #ffffff;
+  border:1px solid #eef1f7;
+}
+
+#Meds td{
+  background-color:  #021117;
+  border:1px solid #eef1f7;
+  color: #ffffff;
+  opacity: 0.7;
+  padding: 6px;
+}
+  </style>
+  </head>
+<body>
+  <div class="tblContainer">
+    <table id="Meds">
+      <tr>
+        <th class="header">Pharmacy</th>
+        <th class="header">Location</th>
+        <th class="header">Medicine Name</th>
+        <th class="header">Cost</th>
+        <th class="header">Quantity</th>
+      </tr>
+      <tr>
+        <td colspan="5">
+          No Results Found.
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+<div class="menu-outer">
+    <div class="menu-icon">
+      <img src="Images/search.jpg" class="searchImg" />
+    </div>
+    <nav>
+        <div class="searchBy">
+          <p class="txt">Search by</p>
+          <br/>
+          <input type="text" name="MedName" placeholder="Medicine Name" class="commonInput" id="MedName">
+          <br/>
+          <br/>
+          <input type="text" name="location" placeholder="Location" class="commonInput" id="MedLocation">
+          <br/>
+          <br/>
+          <input type="text" name="Pharmacy" placeholder="Pharmacy" class="commonInput" id="Pharmacy">
+          <br/>
+          <br/>
+          <br/>
+          <div class="btnSearch" onclick="searchMed();">
+            <table class="innerTable">
+              <tr>
+                <td>
+                  <img src="Images/search.jpg" class="icon"/>
+                </td>
+                <td class="txtTD" valign="middle">
+                  Search
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+   </nav>
+</div>
+<a class="menu-close" onClick="return true">
+    <div class="menu-icon">
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+</a>
+
+<script type="text/javascript">
+var userName = "";
+  var Name = ""
+  var strParam;
+  $(function() {
+    
+        strParam = window.location.href.split("?")[1];
+        strParam = strParam.split("&");
+        userName = (strParam[0].split("="))[1];
+        Name = (strParam[1].split("="))[1];
+      // alert(userName);
+      // // alert(Name);
+      // $("#userMsg").text("Welcome " + Name + "!");
+  });
+  
+  function searchMed(){
+    var MedName = $("#MedName").val();
+    if(MedName === "" || MedName === null)
+    {
+      alert("Please enter medicine name.");
+      return;
+    }
+
+    var MedLocation = $("#MedLocation").val();
+    var Pharmacy = $("#Pharmacy").val();
+
+    $.support.cors = true;
+    $.ajax({
+      url: "http://10.216.75.231:4200/MedicineInfoService/searchMedicineInfo",
+      method: "POST",
+      data: JSON.stringify({'pharmacyName': Pharmacy,'location': MedLocation ,'medicineName': MedName}),
+      contentType: "application/json;",
+      dataType : "json",
+      encoding: false ,
+      success: function( resp ) {
+        var str = "";
+           str += "<tr>";
+           str += "<th class='header'>Pharmacy</th>";
+           str += "<th class='header'>Location</th>";
+           str += "<th class='header'>Medicine Name</th>";
+           str += "<th class='header'>Cost</th>";
+           str += "<th class='header'>Quantity</th>";
+           str += "</tr>";
+
+          if($($($(resp)[0].context)[0].entity)[0].ListOfMedicine == "No Result Found")
+          {
+            str += "<tr><td colspan='5'>No Results Found.</td></tr>"
+            $("#Meds").empty();
+            $("#Meds").append(str);
+            $(".menu-close").mouseover();
+            return;
+          }
+          var obj = $.parseJSON($($($(resp)[0].context)[0].entity)[0].ListOfMedicine);
+          // "ListOfMedicine": "[{\"pharmacyName\":\"Walgreens Pharmacy\",\"location\":\"8538 Tryon Street\",\"medicineName\":\"Aspirin\",\"price\":\"2.34\",\"quantity\":\"18\"}]"
+          
+          $(obj).each(function(){
+            // alert($(this)[0].pharmacyName);
+            str += "<tr>";
+            str += "<td>" + $(this)[0].pharmacyName + "</td>";
+            str += "<td>" + $(this)[0].location + "</td>";
+            str += "<td>" + $(this)[0].medicineName + "</td>";
+            str += "<td> $" + $(this)[0].price + "</td>";
+            str += "<td>" + $(this)[0].quantity + "</td>";
+            str += "</tr>";
+          });
+          $("#Meds").empty();
+          // alert(str);
+          $("#Meds").append(str);
+          $(".menu-close").mouseover();
+          
+      },
+      error: function( req, status, err ) {
+        console.log( 'something went wrong', status, err );
+      }
+    });
+  }
+</script>
+</body>
+</html>

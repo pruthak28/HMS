@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Book an Appointment</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="JS/jquery.min.js"></script>
+  <style type="text/css">
+    /* Stuff I added */
+.menu-outer:hover ~ .menu-close {
+  margin-right:-100px;
+}
+.menu-outer:hover .bar { background:rgba(100,200,240,.9); }
+.menu-outer > nav ul { top:15%; }
+
+/* The rest I chnaged parts but not most of it */
+
+html, body {
+  background:#124060;
+  background-image: url("Images/bookAP.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+body{
+  padding-top: 200px;
+  font-family: verdana;
+
+}
+
+.menu-outer {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  font-family: 'Montserrat', serif;
+  z-index: 998;  
+  width: 100%;
+  left: 100%;
+  margin-left: -100px;
+  height: 200%;
+  background: #324467;  
+  -webkit-transition: all ease .5s;
+  -moz-transition: all ease .5s;
+  -ms-transition: all ease .5s;
+  -o-transition: all ease .5s;
+  transition: all ease .5s; 
+  -webkit-transform-origin: top left;
+  -moz-transform-origin: top left;
+  -ms-transform-origin: top left;
+  -o-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.menu-outer:hover {
+  background: #cbd5e6;
+  left: 0;
+  margin-left: 0;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.menu-icon {
+  cursor: pointer;
+  background-image: url("Images/search.jpg");
+  z-index: 999;
+  position: absolute;
+  top: 40px;
+  left: 3px;
+  width: 30px;
+  pointer-events: none;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transition: all ease .5s;
+  -moz-transition: all ease .5s;
+  -ms-transition: all ease .5s;
+  -o-transition: all ease .5s;
+  transition: all ease .5s;
+}
+
+.menu-outer:hover > .menu-icon {
+  opacity: 0;
+}
+
+.menu-close {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 100%;
+  width: 200px;
+  height: 200px;
+  background: rgba(250,130,70,1);
+  cursor: pointer;
+  -webkit-transition: all ease .5s;
+  -moz-transition: all ease .5s;
+  -ms-transition: all ease .5s;
+  -o-transition: all ease .5s;
+  transition: all ease .5s;
+  -webkit-transform-origin: top right;
+  -moz-transform-origin: top right;
+  -ms-transform-origin: top right;
+  -o-transform-origin: top right;
+  transform-origin: top right;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.menu-close .menu-icon {
+  right: 15px; left: auto;top: 68px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.menu-close .bar {
+  background: rgba(250,250,250,1);
+  width: 100%;
+  height: 5px;
+  position:absolute;
+  -webkit-transform-origin: center;
+  -moz-transform-origin: center;
+  -ms-transform-origin: center;
+  -o-transform-origin: center;
+  transform-origin: center;
+}
+.menu-close .bar:first-child {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.menu-close .bar:last-child {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.searchImg{
+  width:50px;
+  height: 50px;
+}
+
+.searchBy{
+  cursor: pointer;
+  position: absolute;
+  top:10%;
+  width:300px;
+  height: 330px;
+  background-color: #425b8a;
+  border-radius: 20px;
+  padding: 10px;
+    left: 40%; /*prevents possible click when not oppened*/
+    text-align: center;
+  -webkit-transition: all ease .5s;
+  -moz-transition: all ease .5s;
+  -ms-transition: all ease .5s;
+  -o-transition: all ease .5s;
+  transition: all ease .5s;
+    -webkit-box-shadow: 3px 3px 5px 6px #4b679b;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #4b679b;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #4b679b;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.commonInput{
+  border-radius: 20px;
+  padding: 4px;
+  width: 280px;
+  font-size: 14px;
+  color: #000000 !important;
+}
+
+.txt{
+  width: 280px;
+  border-radius:20px;
+  border:1px solid #ffffff;
+  padding: 6px;
+  color: #ffffff;
+  font:normal 16px verdana;
+  margin-left: 2px;
+}
+
+
+.btnSearch{
+  border-radius:20px;
+  border:1px solid #ffffff;
+  padding: 6px;
+  text-align: center;
+}
+
+.txtTD{
+  color: #ffffff;
+  font:normal 16px verdana;
+  margin-left: 10px;
+}
+
+.icon{
+  width: 30px;
+  height: 30px;
+}
+.innerTable{
+  margin-left: 30%;
+}
+
+#Docs 
+{
+  margin-left: 4px;
+  width:990px;
+  border-collapse: collapse;
+  border:1px solid #eef1f7;
+}
+
+.tblContainer{
+  margin-left: 10%;
+  text-align: center;
+  top: 100px;
+  width: 1000px;
+  padding: 20px;
+  -webkit-box-shadow: 3px 3px 5px 6px #000000;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #000000;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #000000;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  
+}
+
+.header{
+  background-color: #324467;
+  padding: 6px;
+  color: #ffffff;
+  border:1px solid #eef1f7;
+}
+
+#Docs td{
+  background-color:  #021117;
+  border:1px solid #eef1f7;
+  color: #ffffff;
+  opacity: 0.7;
+  padding: 6px;
+}
+
+.link{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.bookConf{
+  margin-left: 30%;
+  text-align: center;
+  width: 500px;
+  height: 350px;
+  padding: 20px;
+  -webkit-box-shadow: 3px 3px 5px 6px #000000;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #000000;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #000000;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  display: none;
+}
+
+.lblbookConf{
+color: #00802b;
+font-size: 16px;
+}
+
+.appDetails{
+  width: 496px;
+  height: 346px;
+  border:1px solid white;
+  background-color: #021117;
+}
+
+#DocName, #DocAdd, #appDOA, #emailId, #Contact{
+  color: #ffffff;
+  font-size: 12px;
+  width: 396px;
+  padding-left: 160px;
+  text-align: left;
+}
+
+.lblappDetails{
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.bookConfImg{
+  width:50px;
+  height: 50px;
+}
+  </style>
+  </head>
+<body>
+  <div class="bookConf">
+    <div class="appDetails">
+      <p class="lblappDetails">Appointment Details</p>
+      <br/>
+      <br/>
+      <p id="DocName"></p>
+      <p id="DocAdd"></p>
+      <p id="appDOA"></p>
+      <p id="emailId"></p>
+      <p id="Contact"></p>
+      <img src="Images/bookConf.png" class="bookConfImg">
+      <p class="lblbookConf">Booking Confirmed!</p>
+   </div>
+  </div>
+  <div class="tblContainer">
+    <table id="Docs">
+      <tr>
+           <th class='header'>Select</th>
+           <th class='header'>Doctor's Name</th>
+           <th class='header'>Specialization</th>
+           <th class='header'>Years of Experience</th>
+           <th class='header'>Contact No.</th>
+           <th class='header'>Address</th>
+           <th class='header'>Available On</th>
+           <th class='header'>Email Id</th>
+      </tr>
+      <tr><td colspan='8'>No Results Found.</td></tr>
+    </table>
+  </div>
+  
+<div class="menu-outer">
+    <div class="menu-icon">
+      <img src="Images/search.jpg" class="searchImg" />
+    </div>
+    <nav>
+        <div class="searchBy">
+          <p class="txt">Search by</p>
+          <br/>
+          <input type="date" name="doa" placeholder="Date of Appointment" class="commonInput" id="DOA">
+          <br/>
+          <br/>
+          <input type="text" name="MedName" placeholder="Specialization" class="commonInput" id="SP">
+          <br/>
+          <br/>
+          <input type="text" name="location" placeholder="Location" class="commonInput" id="Location">
+          <br/>
+          <br/>
+          <br/>
+          <div class="btnSearch" onclick="searchDoc();">
+            <table class="innerTable">
+              <tr>
+                <td>
+                  <img src="Images/search.jpg" class="icon"/>
+                </td>
+                <td class="txtTD" valign="middle">
+                  Search
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+   </nav>
+</div>
+<a class="menu-close" onClick="return true">
+    <div class="menu-icon">
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+</a>
+
+<script type="text/javascript">
+var userName = "";
+  var Name = ""
+  var DateApp ="";
+  var strParam;
+  $(function() {
+    
+        strParam = window.location.href.split("?")[1];
+        strParam = strParam.split("&");
+        userName = (strParam[0].split("="))[1];
+        Name = (strParam[1].split("="))[1];
+      // alert(userName);
+      // alert(Name);
+      // $("#userMsg").text("Welcome " + Name + "!");
+  });
+
+  function searchDoc(){
+    var DOA = $("#DOA").val();
+    // alert(DOA);
+    if(DOA === "" || DOA === null)
+    {
+      alert("Please select desired appointment date.");
+      return;
+    }
+
+    var location = $("#Location").val();
+    var SP = $("#SP").val();
+
+    $.support.cors = true;
+    $.ajax({
+      url: "http://10.216.75.231:4200/DoctorInfoService/searchDocAvailable",
+      method: "POST",
+      data: JSON.stringify({'specialization': SP,'address': location ,'dateForAvail': DOA}),
+      contentType: "application/json;",
+      dataType : "json",
+      encoding: false ,
+      success: function( resp ) {
+        var str = "";
+           str += "<tr>";
+           str += "<th class='header'>Select</th>";
+           str += "<th class='header'>Doctor's Name</th>";
+           str += "<th class='header'>Specialization</th>";
+           str += "<th class='header'>Years of Experience</th>";
+           str += "<th class='header'>Contact No.</th>";
+           str += "<th class='header'>Address</th>";
+           str += "<th class='header'>Available On</th>";
+           str += "<th class='header'>Email Id</th>";
+           str += "</tr>";
+
+           DateApp = $($($(resp)[0].context)[0].entity)[0].dateForAvail;
+          if($($($(resp)[0].context)[0].entity)[0].ListOfDoctors == "No Result Found")
+          {
+            str += "<tr><td colspan='8'>No Results Found.</td></tr>"
+            $("#Docs").empty();
+            $("#Docs").append(str);
+            $(".menu-close").mouseover();
+            return;
+          }
+          var obj = $.parseJSON($($($(resp)[0].context)[0].entity)[0].ListOfDoctors);
+          // "[{\"name\":\"aditi\",\"specialization\":\"orthologist\",\"yearOfExp\":\"30\",\"phoneNum\":\"9090909090\",\"address\":\"Tryon Street\",\"daysOfAvail\":\"Saturday\",\"emailId\":\"aditisinha@gmail.com\"}]"
+
+          
+          $(obj).each(function(){
+            // alert($(this)[0].pharmacyName);
+            str += "<tr>";
+            str += "<td><a class='link' onClick='BookAppointment(" + $(this)[0].docId + ", this);'>Book</a></td>";
+            str += "<td>" + $(this)[0].name + "</td>";
+            str += "<td>" + $(this)[0].specialization + "</td>";
+            str += "<td>" + $(this)[0].yearOfExp + "</td>";
+            str += "<td>" + $(this)[0].phoneNum + "</td>";
+            str += "<td>" + $(this)[0].address + "</td>";
+            str += "<td>" + $(this)[0].daysOfAvail + "</td>";
+            str += "<td>" + $(this)[0].emailId + "</td>";
+            str += "</tr>";
+          });
+          $("#Docs").empty();
+          // alert(str);
+          $("#Docs").append(str);
+          $(".menu-close").mouseover();
+          
+      },
+      error: function( req, status, err ) {
+        console.log( 'something went wrong', status, err );
+      }
+    });
+  }
+
+  function BookAppointment(docId, ths){
+    var docName = $(ths).parent().parent().find("td").eq(1).html();
+    var docAdd = $(ths).parent().parent().find("td").eq(5).html();
+    var Contact = $(ths).parent().parent().find("td").eq(4).html();
+    var Email = $(ths).parent().parent().find("td").eq(7).html();
+    // alert(DateApp);
+    $.support.cors = true;
+    $.ajax({
+      url: "http://10.216.75.231:4200/PatientInfoService/bookDocAppointment",
+      method: "POST",
+      data: JSON.stringify({'doctorId': docId,'patientUsername': userName}),
+      contentType: "application/json;",
+      dataType : "json",
+      encoding: false ,
+      success: function( resp ) {
+       
+          if($($($(resp)[0].context)[0].entity)[0].result == "Success"){
+              $("#DocName").html("Doctor: " + docName);
+              $("#DocAdd").html("Address: " + docAdd);
+              $("#appDOA").html("Appointment Date: " + DateApp);
+              $("#emailId").html("Email Id: " + Email);
+              $("#Contact").html("Contact No: " + Contact);
+              $(".tblContainer").css("display","none");
+              $(".bookConf").css("display","block");
+          }
+          else if($($($(resp)[0].context)[0].entity)[0].result == "Failure"){
+            alert("Appointment can not be confirmed.");
+          }
+
+      },
+      error: function( req, status, err ) {
+        console.log( 'something went wrong', status, err );
+      }
+    });
+
+  }
+</script>
+</body>
+</html>

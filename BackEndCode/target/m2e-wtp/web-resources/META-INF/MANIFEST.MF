@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: aditisinha
+Build-Jdk: 11.0.4
+Implementation-Title: com.wfa.version1
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.orion
+Implementation-Vendor: Pivotal Software, Inc.
+Created-By: Maven Integration for Eclipse
+

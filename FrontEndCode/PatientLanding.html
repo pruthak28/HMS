@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Patient Menu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="JS/jquery.min.js"></script>
+
+<style>
+
+body{
+	font-family: verdana !important;
+}
+
+.parallax {
+  background-image: url("Images/bg2.png");
+  height: 800px;
+  padding-left: 20px;
+  padding-top: 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.userMsgDiv{
+	left:0;
+	top:0;
+	height: 70px;
+	padding: 6px;
+	padding-left: 10px;
+	border-radius: 40px;
+	background-color: white;
+		-webkit-box-shadow: 3px 3px 5px 6px #1d4b63;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #1d4b63;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #1d4b63;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.UserAvatar{
+	height: 50px;
+	width: 50px;
+}
+
+#userMsg{
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.menuDivContainer{
+	width:600px;
+	height: 600px;
+	margin-left: 410px;
+}
+
+ .commonMenuImg{
+	width:200px;
+	height: 200px;
+} 
+.commonMenuLink{
+	width: 230px;
+	height: 230px;
+	padding: 10px;
+	text-align: center;
+	border-radius: 20px;
+	-webkit-box-shadow: 3px 3px 5px 6px #1d4b63;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #1d4b63;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #1d4b63;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  cursor: pointer;
+}
+
+.txt{
+	font:normal 14px verdana;
+	color: white;
+}
+</style>
+
+</head>
+<body>
+
+<div class="parallax">
+	<table class="userMsgDiv">
+		<tr>
+			<td>
+				<img src="Images/avatar7.png" class="UserAvatar" />
+			</td>
+			<td id="userMsg" valign="middle">
+				Welcome!
+			</td>
+		</tr>
+	</table>
+	<table class="menuDivContainer">
+		<tr>
+			<td>
+				<div class="commonMenuLink" onclick="bookAppointment();">
+					<img src="Images/PatientMenu/BookAppointment.png" class="commonMenuImg" />
+					<p class="txt">Book an Appointment</p>
+				</div>
+			</td>
+			<td>
+				<div class="commonMenuLink" onclick="bookPathAppointment();">
+					<img src="Images/PatientMenu/Patho.jpeg" class="commonMenuImg" />
+					<p class="txt">Book a Pathology Appointment</p>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="commonMenuLink" onclick="MedAvailability();">
+					<img src="Images/PatientMenu/MedAvail.png" class="commonMenuImg" />
+					<p class="txt">Check Medicine Availability</p>
+				</div>
+			</td>
+			<td>
+				<div class="commonMenuLink" onclick="PatientHistory();">
+					<img src="Images/PatientMenu/history.png" class="commonMenuImg" />
+					<p class="txt">Check History</p>
+				</div>
+			</td>
+		</tr>
+		
+	</table>
+</div>
+
+<script type="text/javascript">
+	//<!--SignUp patient:  450px -->
+	//<!--SignUp doctor:  600px -->
+
+  var userName = "";
+  var Name = ""
+  var strParam;
+	$(function() {
+		
+        strParam = window.location.href.split("?")[1];
+        strParam = strParam.split("&");
+        userName = (strParam[0].split("="))[1];
+        Name = (strParam[1].split("="))[1];
+    	// alert(userName);
+    	// alert(Name);
+    	$("#userMsg").text("Welcome " + Name + "!");
+  });
+
+	function MedAvailability(){
+		var HREF =  "";
+		HREF += "../SSDIProject/InnerMenu.html?UserName=" + userName + "&Name=" + Name;
+		// alert(HREF);
+		window.open(HREF,"_self");
+	}
+
+	function bookAppointment(){
+		var HREF =  "";
+		HREF += "../SSDIProject/bookAP.html?UserName=" + userName + "&Name=" + Name;
+		// alert(HREF);
+		window.open(HREF,"_self");
+	}
+
+	function bookPathAppointment(){
+		var HREF =  "";
+		HREF += "../SSDIProject/bookPath.html?UserName=" + userName + "&Name=" + Name;
+		// alert(HREF);
+		window.open(HREF,"_self");
+	}
+
+	function PatientHistory(){
+		var HREF =  "";
+		HREF += "../SSDIProject/PatientHistory.html?UserName=" + userName + "&Name=" + Name + "&showExtraBtn=Y";
+		// alert(HREF);
+		window.open(HREF,"_self");
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="JS/jquery.min.js"></script>
+
+<style>
+
+body{
+	font-family: verdana !important;
+}
+
+.parallax {
+  background-image: url("Images/loginbg.png");
+  height: 620px;
+  padding-left: 750px;
+  padding-top: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.loginDiv{
+	width:340px;
+	height: 220px;
+	padding: 6px;
+	padding-top: 50px;
+	padding-left: 50px;
+	border-radius: 20px;
+		-webkit-box-shadow: 3px 3px 5px 6px #045462;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #045462;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #045462;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.commonInput{
+	border-radius: 20px;
+	padding: 4px;
+	width: 280px;
+	font-size: 12px;
+	color: #757575;
+}
+
+.commonButton{
+	width:130px;
+	border-radius: 20px;
+	border: none;
+	margin-right: 20px;
+	border-collapse: collapse;
+	color: #3bdbf7;
+cursor: pointer;
+		-webkit-box-shadow: 3px 3px 5px 6px #045462;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #045462;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #045462;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+
+}
+
+.commonButton td{
+	padding: 6px;
+	height: 40px;
+}
+
+
+.commonBtnImg{
+   width: 40px;
+   height: 34px;
+}
+
+.SignUpDiv{
+	width:340px;
+	height: 600px;
+	padding: 6px;
+	padding-top: 50px;
+	padding-left: 50px;
+	border-radius: 20px;
+  -webkit-box-shadow: 3px 3px 5px 6px #045462;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #045462;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #045462;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  display: none;
+}
+
+.tdText{
+	color: #f2f2f2 !important;
+	font-size: 12px;
+}
+
+.cancelBtnImg{
+	border-radius: 10px;
+	margin-left: 6px;
+}
+
+#FemaleGender, #MaleGender{
+cursor: pointer;
+}
+
+.genderDiv{
+	margin-right: 10px;
+}
+
+input[type="date"]::before { 
+	content: attr(data-placeholder);
+	color: red !important;
+}
+
+.genderlbl{
+	font-size: 14px;
+}
+
+.PatientDiv{
+	display: none;
+}
+
+.chosen-select, .ddl{
+	width: 290px;
+}
+
+
+</style>
+
+
+
+</head>
+<body>
+
+<div class="parallax">
+	<div class="loginDiv">
+		<input type="text" name="username" placeholder="Username" class="commonInput" required id="userName">
+		<br/>
+		<br/>
+		<input type="password" name="password" placeholder="Password" class="commonInput" id="Password">
+		<br/>
+		<br/>
+		<br/>
+		<table>
+			<tr>
+				<td>
+					<table class="commonButton" onclick="Login();">
+						<tr>
+							<td>
+								<img src="Images/loginKey.png" class="commonBtnImg"/>
+							</td>
+							<td>
+								Login
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table class="commonButton" onclick="SignUpClicked();">
+						<tr>
+							<td>
+								<img src="Images/SignUp.png" class="commonBtnImg"/>
+							</td>
+							<td>
+								Sign Up
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="SignUpDiv">
+		<div class="PatientDiv">
+			<input type="text" name="Name" placeholder="Name" class="commonInput" id="PatientName">
+			<br/>
+			<br/>
+			<input type="email" name="Email" placeholder="Email" class="commonInput" id="PatientEmail">
+			<br/>
+			<br/>
+			<input type="date" name="DOB" placeholder="Date of Birth" class="commonInput"  id="PatientDOB">
+			<br/>
+			<br/>
+			<table>
+				<tr>
+					<td  class="tdText genderlbl" >
+						Gender: 
+					</td>
+					<td>
+						<table class="genderDiv">
+							<tr>
+								<td>
+									<input type="radio" name="gender" value="F" id="FemaleGender" checked="true">
+								</td>
+								<td valign="bottom"   class="tdText" for="FemaleGender">
+									Female
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td>
+						<table class="genderDiv">
+							<tr>
+								<td>
+									<input type="radio" name="gender" value="M" id="MaleGender">
+								</td>
+								<td valign="bottom"   class="tdText"  for="MaleGender">
+									Male
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<br/>
+			<input type="number" name="ContactNo" placeholder="Contact Number" class="commonInput"  id="PatientContact">
+			<br/>
+			<br/>
+			<input type="password" name="pwd" placeholder="Password" class="commonInput"  id="PatientPwd">
+			<br/>
+			<br/>
+			<input type="password" name="cnfpwd" placeholder="Confirm Password" class="commonInput" id="PatientCnfPwd">
+			<br/>
+			<br/>
+			<br/>
+			<table>
+				<tr>
+					<td>
+						<table class="commonButton" onclick="PatientSignUp();">
+							<tr>
+								<td>
+									<img src="Images/SignUp.png" class="commonBtnImg"/>
+								</td>
+								<td>
+									Sign Up
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td>
+						<table class="commonButton" onclick="Cancel();">
+							<tr>
+								<td>
+									<img src="Images/cancel.jpg" class="commonBtnImg cancelBtnImg"/>
+								</td>
+								<td>
+									Cancel
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="DoctorDiv">
+			<input type="text" name="DocName" placeholder="Name" class="commonInput" id="DoctorName">
+			<br/>
+			<br/>
+			<input type="email" name="DocEmail" placeholder="Email" class="commonInput" id="DoctorEmail">
+			<br/>
+			<p class="tdText">Specialization:</p>
+			<select  class="commonInput ddl"  id="DoctorSP">
+			  <option value="Allergy & Immunology">Allergy & Immunology</option>
+			  <option value="Anesthesiology">Anesthesiology</option>
+			  <option value="Dermatology">Dermatology</option>
+			  <option value="Diagnostic Radiology">Diagnostic Radiology</option>
+			  <option value="Emergency Medicine">Emergency Medicine</option>
+			  <option value="Family Medicine">Family Medicine</option>
+			  <option value="Internal Medicine">Internal Medicine</option>
+			  <option value="Medical Genetics">Medical Genetics</option>
+			  <option value="Neurology">Neurology</option>
+			  <option value="Nuclear Medicine">Nuclear Medicine</option>
+			  <option value="Obstetrics & Gynecology">Obstetrics & Gynecology</option>
+			  <option value="Ophthalmology">Ophthalmology</option>
+			  <option value="Pathology">Pathology</option>
+			  <option value="Pediatrics">Pediatrics</option>
+			  <option value="Physical Medicine & Rehabilitation">Physical Medicine & Rehabilitation</option>
+			  <option value="Preventive Medicine">Preventive Medicine</option>
+			  <option value="Psychiatry">Psychiatry</option>
+			  <option value="Radiation Oncology">Radiation Oncology</option>
+			  <option value="Surgery">Surgery</option>
+			  <option value="Urology">Urology</option>
+			</select>
+			<br/>
+			<br/>
+			<input type="number" name="DocYrsExp" placeholder="Years of Experience" class="commonInput" id="DoctorExp">
+			<br/>
+			<br/>
+			<textarea name="txtAddress" rows="3" class="commonInput" placeholder="Address" id="DoctorAddress"></textarea>
+			<br/>
+			<br/>
+			<input type="number" name="DocContactNo" placeholder="Contact Number" class="commonInput" id="DoctorContact">
+			<br/>
+			<p class="tdText">Availability: </p>
+			<select data-placeholder="Select Availability" multiple class="chosen-select commonInput" name="Availability"  id="DoctorAvail">
+			    <option value="Monday">Monday</option>
+			    <option value="Tuesday">Tuesday</option>
+			    <option value="Wednesday">Wednesday</option>
+			    <option value="Thursday">Thursday</option>
+			    <option value="Friday">Friday</option>
+			    <option value="Saturday">Saturday</option>
+			    <option value="Sunday">Sunday</option>
+			</select>
+			<br/>
+			<br/>
+			<input type="password" name="docpwd" placeholder="Password" class="commonInput" id="DoctorPwd">
+			<br/>
+			<br/>
+			<input type="password" name="doccnfpwd" placeholder="Confirm Password" class="commonInput" id="DoctorCnfPwd">
+			<br/>
+			<br/>
+			<br/>
+			<table>
+				<tr>
+					<td>
+						<table class="commonButton" onclick="DoctorSignUp();">
+							<tr>
+								<td>
+									<img src="Images/SignUp.png" class="commonBtnImg"/>
+								</td>
+								<td>
+									Sign Up
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td>
+						<table class="commonButton" onclick="Cancel();">
+							<tr>
+								<td>
+									<img src="Images/cancel.jpg" class="commonBtnImg cancelBtnImg"/>
+								</td>
+								<td>
+									Cancel
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+
+<script type="text/javascript">
+	//<!--SignUp patient:  450px -->
+	//<!--SignUp doctor:  600px -->
+
+  var SignUpLoginType = "";
+	$(function() {
+		
+        SignUpLoginType = window.location.href.split("=")[1];
+
+    	// alert(SignUpLoginType);
+  });
+
+
+function SignUpClicked(){
+	$(".loginDiv").css("display","none");
+	$(".SignUpDiv").css("display","block");
+	if(SignUpLoginType == "Doctor")
+	{
+		$(".parallax").css("height","770px");
+		$(".parallax").css("padding-top","50px");
+		$(".SignUpDiv").css("height","670px");
+		$(".DoctorDiv").css("display","block");
+		$(".PatientDiv").css("display","none");
+	}
+	else if(SignUpLoginType == "Patient")
+	{
+		$(".parallax").css("height","620");
+		$(".parallax").css("padding-top","200px");
+		$(".SignUpDiv").css("height","450px");
+		$(".DoctorDiv").css("display","none");
+		$(".PatientDiv").css("display","block");
+	}
+}
+
+function Cancel()
+{
+	$(".loginDiv").css("display","block");
+	$(".SignUpDiv").css("display","none");
+	$(".parallax").css("height","620");
+	$(".parallax").css("padding-top","200px");
+}
+
+function Login(){
+	var userName = $("#userName").val();
+	var Password = $("#Password").val();
+	// alert($("#userName").val());
+	// alert($("#Password").val());
+
+	if(userName === "" || userName === null)
+	{
+		alert("Please enter username.");
+		return;
+	}
+
+
+	if(Password === "" || Password === null)
+	{
+		alert("Please enter Password.");
+		return;
+	}
+
+	$.support.cors = true;
+	$.ajax({
+	  url: "http://10.216.75.231:4200/PatientInfoService/loginAutenticate",
+	  method: "POST",
+	  data: JSON.stringify({"username": userName,"password": Password, "personType": (SignUpLoginType == "Patient")? "P":"D"}),
+	  contentType: "application/json;",
+	  dataType : "json",
+	  encoding: false ,
+	  success: function( resp ) {
+
+	    	if($($($(resp)[0].context)[0].entity)[0].result == "Invalid Username")
+	    	{
+				if(SignUpLoginType == "Patient") alert("Patient doesn't exist.");
+				else if(SignUpLoginType == "Doctor") alert("Doctor doesn't exist.");
+	    	}
+			else if($($($(resp)[0].context)[0].entity)[0].result == "Authentication successful")
+	    	{
+	    		if(SignUpLoginType == "Patient"){
+		    		var HRef = "../SSDIProject/PatientLanding.html";
+		    		HRef = HRef + "?UserName=" + userName + "&Name=" + $($($(resp)[0].context)[0].entity)[0].name;
+	    		}
+	    		else if(SignUpLoginType == "Doctor")
+	    		{
+	    			var HRef = "../SSDIProject/DoctorLanding.html";
+		    		HRef = HRef + "?UserName=" + userName + "&Name=" + $($($(resp)[0].context)[0].entity)[0].name;
+	    		}
+	    		window.open(HRef,"_self");
+	    	}
+	    	else if($($($(resp)[0].context)[0].entity)[0].result == "Invalid Password/User Type"){
+	    		alert("Invalid Password/User Type");
+	    	}
+	  },
+	  error: function( req, status, err ) {
+	    console.log( 'something went wrong', status, err );
+	  }
+	});
+}
+
+function PatientSignUp(){
+	
+	var Name = $("#PatientName").val();
+	if(Name === "" || Name === null)
+	{
+		alert("Please enter name.");
+		return;
+	}
+
+	var email = $("#PatientEmail").val();
+	if(email === "" || email === null)
+	{
+		alert("Please enter email id.");
+		return;
+	}
+
+	var DOB = $("#PatientDOB").val();
+	if(DOB === "" || DOB === null)
+	{
+		alert("Please enter date of birth.");
+		return;
+	}
+
+	var Sex = $("input[name='gender']:checked"). val();
+	if(Sex === "" || Sex === null)
+	{
+		alert("Please select gender.");
+		return;
+	}
+
+	var Contact = $("#PatientContact").val();
+	if(Contact.toString() === "" || Contact === null)
+	{
+		alert("Please enter contact number.");
+		return;
+	}
+
+	var Pwd = $("#PatientPwd").val();
+	var PatientCnfPwd = $("#PatientCnfPwd").val();
+	if(Pwd === "" || Pwd === null)
+	{
+		alert("Please enter password.");
+		return;
+	}
+	if(PatientCnfPwd === "" || PatientCnfPwd === null)
+	{
+		alert("Please confirm password.");
+		return;
+	}
+	if(PatientCnfPwd != Pwd)
+	{
+		alert("Passwords don't match!");
+		return;
+	}
+	
+	$.support.cors = true;
+	$.ajax({
+	  url: "http://10.216.75.231:4200/PatientInfoService/savePatientInfo",
+	  method: "POST",
+	  data: JSON.stringify({'name': Name,'dateOfBirth': DOB.replace("/","-") ,'emailId': email,'password': Pwd,'phoneNumber': Contact.toString(),'sex': Sex}),
+	  contentType: "application/json;",
+	  dataType : "json",
+	  encoding: false ,
+	  success: function( resp ) {
+
+	    	if($($($(resp)[0].context)[0].entity)[0].result == "Success"){
+	    		// alert("success!")
+	    		var HRef = "../SSDIProject/PatientLanding.html";
+	    		HRef = HRef + "?UserName=" + email + "&Name=" + Name;
+	    		
+	    		window.open(HRef,"_self");
+	    	}
+	    	else if($($($(resp)[0].context)[0].entity)[0].result == "Failure")
+	    	{
+	    		alert("Sign Up could not be completed. Please check inputs.");
+	    	}
+
+	  },
+	  error: function( req, status, err ) {
+	    console.log( 'something went wrong', status, err );
+	  }
+	});
+}
+
+function DoctorSignUp(){
+	var Name = $("#DoctorName").val();
+	if(Name === "" || Name === null)
+	{
+		alert("Please enter name.");
+		return;
+	}
+
+	var email = $("#DoctorEmail").val();
+	if(email === "" || email === null)
+	{
+		alert("Please enter email id.");
+		return;
+	}
+
+	var SP = $("#DoctorSP option:selected").text();
+	if(SP === "" || SP === null)
+	{
+		alert("Please select specialization.");
+		return;
+	}
+
+	var Exp = $("#DoctorExp").val();
+	if(Exp.toString() === "" || Exp === null)
+	{
+		alert("Please enter years of experience.");
+		return;
+	}
+
+	var Add = $("#DoctorAddress").val();
+	if(Add === "" || Add === null)
+	{
+		alert("Please enter address.");
+		return;
+	}
+
+	var Contact = $("#DoctorContact").val();
+	if(Contact.toString() === "" || Contact === null)
+	{
+		alert("Please enter contact number.");
+		return;
+	}
+
+	var DocAvail = "";
+	$("#DoctorAvail option:selected").each(function(){
+		DocAvail += $(this).text() + ",";
+	});
+	if(DocAvail === "" || DocAvail === null){
+		alert("Please select availability.");
+	}
+	else
+	{
+		DocAvail = DocAvail.substring(0,DocAvail.length-1);
+	}
+	
+	var Pwd = $("#DoctorPwd").val();
+	var DoctorCnfPwd = $("#DoctorCnfPwd").val();
+	if(Pwd === "" || Pwd === null)
+	{
+		alert("Please enter password.");
+		return;
+	}
+	if(DoctorCnfPwd === "" || DoctorCnfPwd === null)
+	{
+		alert("Please confirm password.");
+		return;
+	}
+	if(DoctorCnfPwd != Pwd)
+	{
+		alert("Passwords don't match!");
+		return;
+	}
+
+	$.support.cors = true;
+	$.ajax({
+	  url: "http://10.216.75.231:4200/DoctorInfoService/saveDoctorInfo",
+	  method: "POST",
+	  data: JSON.stringify({'name': Name,'email': email,'specialization': SP,'exp': Exp,'address': Add, 'phoneNumber':Contact, 'availability':DocAvail, 'password': Pwd}),
+	  contentType: "application/json;",
+	  dataType : "json",
+	  encoding: false ,
+	  success: function( resp ) {
+
+	    	if($($($(resp)[0].context)[0].entity)[0].result == "Success"){
+	    		var HRef = "../SSDIProject/DoctorLanding.html";
+	    		HRef = HRef + "?UserName=" + email + "&Name=" + Name;
+	    		
+	    		window.open(HRef,"_self");
+	    	}
+	    	else if($($($(resp)[0].context)[0].entity)[0].result == "Failure")
+	    	{
+	    		alert("Fail!")
+	    	}
+
+	  },
+	  error: function( req, status, err ) {
+	    console.log( 'something went wrong', status, err );
+	  }
+	});
+}
+
+
+
+</script>
+
+</body>
+</html>

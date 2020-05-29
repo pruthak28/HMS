@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Health Care Management System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="JS/jquery.min.js"></script>
+<style>
+.parallax {
+  background-image: url("Images/background1.jpg");
+  height: 400px;
+  padding: 100px;
+  padding-left: 250px;
+  padding-top: 300px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.8;
+}
+
+.Title{
+	border: 2px solid #171a1c;
+	background: #97A0A6;
+	width: 900px;
+	height: 100px;
+	left:100px;
+	opacity: 0.8;
+	/*box-shadow: 4px 8px #0c0d0e;*/
+	-webkit-box-shadow: 3px 3px 5px 6px #0c0d0e;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #0c0d0e;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #0c0d0e;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+
+}
+
+.header{
+	font: 48px/2px verdana;
+	color: #000000;
+	padding-right: auto;
+	padding-left: auto;
+	text-align: center;}
+
+.downArrow
+{
+	width:50px;
+	height: 50px;
+	transform: rotate(180deg);
+	padding-right: 400px;
+	padding-bottom: 40px;
+	cursor: pointer;
+	opacity: 0.9;
+
+}
+
+.secondDiv{
+    height:800px;
+    font-size:36px;
+    background-image: url("Images/bg4.jpg");
+    background-repeat: no-repeat;
+    opacity: 0.8;
+}
+
+.docImg{
+	width:200px;
+	height:300px;
+}
+
+.commonDiv{
+	cursor: pointer;
+	float: left;
+	width:200px;
+	height:200px;
+	margin: 50px;
+	background: transparent;
+	border: 2px solid #171a1c;
+	border-radius: 10px;
+	-webkit-box-shadow: 3px 3px 5px 6px #0c0d0e;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #0c0d0e;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #0c0d0e;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+.containerLoginItem{
+	float: left;
+	margin-left: 400px;
+	margin-top: 100px;
+}
+
+.avatar{
+	width:150px;
+	height: 150px;
+	margin-left: 25px;
+	margin-top: 10px;
+	border-radius: 80px;
+}
+
+.avatarTitle{
+	color: #f2f2f2;
+	font: 18px verdana;
+	text-align: center;
+	margin-top: 0px;
+}
+
+
+
+.slider {
+	margin-left: 450px;
+	overflow: hidden;
+	position: relative;
+	width: 510px !important;
+	height: 130px !important;
+		background-color: #435a74;
+		border-radius: 10px;
+	-webkit-box-shadow: 3px 3px 5px 6px #0c0d0e;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #0c0d0e;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #0c0d0e;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.slider-wrapper {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.slide {
+	float: left;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	opacity: 0;
+}
+
+.slider-wrapper > .slide:first-child {
+	opacity: 1;
+}
+
+.slider{
+	margin-top: 100px;
+}
+
+
+</style>
+
+
+
+</head>
+<body>
+
+<div class="parallax">
+	<div class="Title">
+		<h3 class="header">Health Care Management System</h3>
+		<img src="Images/arrow3.png" class="downArrow" id="downArrow" onclick="scrollDown();" /> 
+	</div>
+
+</div>
+
+<div class="secondDiv">
+	<div class="containerLoginItem">
+		<a class="commonDiv" href="../SSDIProject/LoginPage.html?SignUpLoginType=Doctor">
+			<img src="Images/avatar6.jpg" class="avatar" />
+			<p class="avatarTitle">Doctor</p>
+		</a>
+		<a class="commonDiv" href="../SSDIProject/LoginPage.html?SignUpLoginType=Patient">
+			<img src="Images/avatar7.png" class="avatar"/>
+			<p class="avatarTitle">Patient</p>
+		</a>
+	</div>
+
+     <div class="slider" id="main-slider"><!-- outermost container element -->
+		<div class="slider-wrapper"><!-- innermost wrapper element -->
+			<div class="slide" data-image="Images/LandinPageIcons/1.png"></div><!-- slides -->
+			<div class="slide" data-image="Images/LandinPageIcons/2.png"></div>
+			<div class="slide" data-image="Images/LandinPageIcons/3.png"></div>
+		</div>
+	</div>	
+  
+</div>
+
+
+
+<script type="text/javascript">
+
+ // $('.slider_four_in_line').EasySlides({
+ //                'autoplay': true,
+ //                'show': 9
+ //            })
+
+
+ (function( $ ) {
+	$.fn.slideshow = function( options ) {
+		options = $.extend({
+			slides: ".slide",
+			speed: 3000,
+			easing: "linear"
+			
+		}, options);
+		
+		var timer = null;
+		var index = 0;
+		
+		var slideTo = function( slide, element ) {
+			var $currentSlide = $( options.slides, element ).eq( slide );
+			
+			$currentSlide.stop( true, true ).
+			animate({
+				opacity: 1
+			}, options.speed, options.easing ).
+			siblings( options.slides ).
+			css( "opacity", 0 );	
+			
+		};
+		
+		var autoSlide = function( element ) {
+			timer = setInterval(function() {
+				index++;
+				if( index == $( options.slides, element ).length ) {
+					index = 0;
+				}
+				slideTo( index, element );
+			}, options.speed);	
+		};
+		
+		var startStop = function( element ) {
+			element.hover(function() {
+				clearInterval( timer );
+				timer = null;	
+			}, function() {
+				autoSlide( element );	
+			});
+		};
+		
+		return this.each(function() {
+			var $element = $( this ),
+				$previous = $( options.previous, $element ),
+				$next = $( options.next, $element ),
+				index = 0,
+				total = $( options.slides ).length;
+				
+				$( options.slides, $element ).each(function() {
+					var $slide = $( this );
+					var image = $slide.data( "image" );
+					$slide.css( "backgroundImage", "url(" + image + ")" );
+				});
+				
+				autoSlide( $element );
+				startStop( $element );
+			
+		});
+	};
+	
+	$(function() {
+		$( "#main-slider" ).slideshow();
+		
+	});
+	
+})( jQuery );
+
+
+
+function scrollDown(){
+	// alert(1);
+	var scrolled = 0;
+	scrolled=scrolled+300;
+	var y = $(window).scrollTop();  //your current y position on the page
+	$(window).scrollTop(y+800);
+        
+
+}
+
+</script>
+
+</body>
+</html>
